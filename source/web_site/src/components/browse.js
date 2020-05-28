@@ -3,7 +3,6 @@ import Amplify, { Auth, API } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Alert, Container, Row, Col, Form, FormGroup, Input, Button, Modal, ModalHeader, Progress, ModalBody, Pagination, PaginationItem, PaginationLink} from 'reactstrap';
 import MediaCard from './mediacard';
-import Tools from './tools';
 
 class Browse extends Component {
 	constructor(props) {
