@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Amplify, { API } from 'aws-amplify';
+import Amplify, { Auth, API } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Alert, Container, Row, Col, Form, FormGroup, Input, Button, Modal, ModalHeader, Progress, ModalBody, Pagination, PaginationItem, PaginationLink} from 'reactstrap';
 import MediaCard from './mediacard';
+import Tools from './tools';
 
 class Browse extends Component {
 	constructor(props) {
@@ -25,10 +26,41 @@ class Browse extends Component {
 
 	componentDidMount() {
 		this.Search({"change_page":1});
+    	Auth.currentAuthenticatedUser()
+        .then(
+          data => {
+
+            global.user = data
+
+            //console.log(data);
+            console.log("Browse states: " + data.attributes['custom:role']);
+
+            // Show signout button
+            this.setState(state => ({showSignout: true}));
+
+            // Hide/show proper views based on rights
+            switch (data.attributes['custom:role']) {
+              case "student":
+                this.setState(state => ({showUpload: true}));
+                break;
+              case "teacher":
+                this.setState(state => ({showUpload: true}));
+                break;
+              case "admin":
+                this.setState(state => ({showUpload: true}));
+                break;
+              default:
+                break;
+            };
+          })
+        .catch(
+          err => { console.log(err);
+            this.user = null;
+          });
 	}
 
 	componentDidUpdate() {
-  window.scrollTo(0,0);
+  		window.scrollTo(0,0);
 	}
 
 	Change(e) {

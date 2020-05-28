@@ -5,20 +5,20 @@ import { Auth } from 'aws-amplify';
 
 class Settings extends Component {
   constructor(props) {
-	    super(props);
-      this.Signout = this.Signout.bind(this);
-    }
+    super(props);
+    this.Signout = this.Signout.bind(this);
+  }
 
-    Signout() {
-      Auth.signOut()
-      .then(function(result) {
-        //console.log(result);
-        window.location.reload();
-      })
-      .catch(function(err) {
-        //console.log(err);
-      });
-    }
+  Signout() {
+    Auth.signOut()
+    .then(function(result) {
+      //console.log(result);
+      window.location.href = "/";
+    })
+    .catch(function(err) {
+      //console.log(err);
+    });
+  }
 
   render() {
     return (
