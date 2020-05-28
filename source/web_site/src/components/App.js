@@ -8,7 +8,6 @@ import Upload from './upload';
 import Browse from './browse';
 import Settings from './settings';
 import Result from './result';
-import Tools from './tools';
 declare var media_analysis_config;
 
 global.user = {};
